@@ -71,6 +71,7 @@
     <script type="text/javascript">
       function handleForm(e){
         e.preventDefault()
+        console.log('hello')
         const data = { email: document.getElementById('email').value }
         return axios({
           method: 'post',
