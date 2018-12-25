@@ -1,0 +1,27 @@
+{
+  "name": "huddle-landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "min.js",
+  "dependencies": {
+    "netlify-lambda": "^1.1.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+
+  },
+  "scripts": {
+    "build:functions": "netlify-lambda build functions -c ./webpack.config.js",
+    "start:server": "netlify-lambda serve functions -c ./webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "proxy": {
+    "/.netlify/functions": {
+      "target": "http://localhost:9000",
+      "pathRewrite": {
+        "^/\\.netlify/functions": ""
+      }
+    }
+  }
+}
