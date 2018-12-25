@@ -40,7 +40,7 @@
     </nav>
     <div class="xo w-full h-screen overflow-hidden relative flex items-center justify-center bg-black">
       <div class="mx-auto container flex justify-center items-center">
-        <div class="flex justify-center items-center flex-col py-20 my-20 w-full">
+        <div class="flex justify-center items-center flex-col py-20 w-full">
           <div class="flex justify-center items-center flex-col py-20 my-20 max-w-md">
             <h1 class="text-5xl text-white font-light max-w-md text-center mb-12">It’s time your group privacy was made a priority.</h1>
             <p class="text-white font-light w-full text-center mb-4 italic">Be the first to know when we launch</p>
@@ -48,12 +48,15 @@
               
               <div class="w-full relative rounded-full overflow-hidden">
                 
-                <input v-model="huddle.name" type="text" class="block appearance-none text-black py-4 px-4 w-full bg-white outline-none text-lg"placeholder="Enter your email address">
+                <form onSubmit="handleForm" class="w-full">
+                  <input id="email" type="text" class="block appearance-none text-black py-4 px-4 w-full bg-white outline-none text-lg" placeholder="Enter your email address">
+                  
+                  </input>
+                  <button type="submit" class="outline-none focus:outline-none w-16 absolute pin-t pin-b pin-r rounded-tr-full rounded-br-full flex items-center justify-center bg-blue cursor-pointer">
+                    <img src="./arrow-r.svg" width="22">
+                  </button>
+                </form>
                 
-                </input>
-                <span class="w-16 absolute pin-t pin-b pin-r rounded-tr-full rounded-br-full flex items-center justify-center bg-blue cursor-pointer">
-                  <img src="./arrow-r.svg" width="22">
-                </span>
               </div>
               
             </div>
@@ -64,5 +67,18 @@
     <footer class="fixed w-full pin-b flex justify-center items-center py-3 bg-blue">
       <a class="text-white font-light block no-underline" href="https://blockstack.com" target="_blank">Proudly powered by Blockstack 🚀</a>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function handleForm(e){
+        e.preventDefault()
+        const data = { email: document.getElementById('email').value }
+        return axios({
+          method: 'post',
+          url: '/.netlify/functions/signup',
+          data: data,
+        })
+      }
+    </script>
   </body>
 </html>
