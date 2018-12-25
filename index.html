@@ -46,16 +46,14 @@
             <p class="text-white font-light w-full text-center mb-4 italic">Be the first to know when we launch</p>
             <div class="flex justify-center items-center w-full max-w-sm">
               
-              <div class="w-full relative rounded-full overflow-hidden">
+              <div class="w-full relative rounded-full overflow-hidden" id="app">
                 
-                <form action="#" onSubmit="handleForm" class="w-full">
-                  <input id="email" name="email" type="email" class="block appearance-none text-black py-4 px-4 w-full bg-white outline-none text-lg" placeholder="Enter your email address" required>
+                <input id="email" name="email" type="email" class="block appearance-none text-black py-4 px-4 w-full bg-white outline-none text-lg" placeholder="Enter your email address" v-model="email" @keydown.enter="handleForm">
                   
                   </input>
-                  <button type="submit" class="outline-none focus:outline-none w-16 absolute pin-t pin-b pin-r rounded-tr-full rounded-br-full flex items-center justify-center bg-blue cursor-pointer">
+                  <button @click="handleForm" type="submit" class="outline-none focus:outline-none w-16 absolute pin-t pin-b pin-r rounded-tr-full rounded-br-full flex items-center justify-center bg-blue cursor-pointer">
                     <img src="./arrow-r.svg" width="22">
                   </button>
-                </form>
                 
               </div>
               
@@ -69,16 +67,27 @@
     </footer>
     <script src="./min.js"></script>
     <script type="text/javascript">
-      function handleForm(e){
-        e.preventDefault()
-        console.log('hello')
-        const data = { email: document.getElementById('email').value }
-        return axios({
-          method: 'post',
-          url: '/.netlify/functions/signup',
-          data: data,
-        })
-      }
+      var app = new Vue({
+        el: '#app',
+        data: {
+          email: ''
+        },
+        methods: {
+          handleForm(){
+            e.preventDefault()
+            console.log('hello')
+            axios({
+              method: 'post',
+              url: '/.netlify/functions/signup',
+              data: { email: this.email },
+            }).then(() => {
+
+            }).catch(e => {
+
+            })
+          }
+        }
+      })
     </script>
   </body>
 </html>
